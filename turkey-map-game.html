@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoQuest: Türkiye Haritası Görevi</title> <!-- Sayfa başlığı güncellendi -->
+    <link rel="stylesheet" href="style.css"> <!-- Ana stil dosyasını bağlıyoruz -->
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>GeoQuest</h1>
+            <p class="site-slogan">Coğrafya Macerası</p>
+            <nav>
+                <ul>
+                    <li><a href="index.html#oyun-alani">Oyun Alanına Geri Dön</a></li> <!-- Ana oyun alanına dönüş linki -->
+                    <li><a href="index.html#konular">Konular</a></li>
+                    <li><a href="index.html#iletisim">İletişim</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Türkiye Haritası Görevi Bölümü -->
+    <section id="turkey-map-game-section" class="section game-area-section"> <!-- Yeni ID -->
+        <div class="container">
+            <h2>Türkiye Haritası Görevi</h2> <!-- Başlık -->
+            <p>Haritada gösterilmesi istenen yerin konumunu bulun.</p> <!-- Giriş metni -->
+
+            <!-- Türkiye Haritası Oyunu Alanı -->
+             <div class="game-example map-challenge-example">
+                <h3>Harita Görevi</h3> <!-- Oyun başlığı -->
+                <p class="map-challenge-description"></p> <!-- Sorunun ne olduğu burada yazacak -->
+
+                <div class="turkey-map-container"> <!-- Harita görselini içeren container -->
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Turkey_location_map.svg" alt="Türkiye Haritası" class="turkey-map-image"> <!-- Türkiye Haritası -->
+                    <div class="map-hotspot"></div> <!-- Tıklanabilir hotspot (konumu JS ile belirlenecek) -->
+                </div>
+
+                 <p class="map-challenge-feedback map-feedback"></p>
+                 <!-- Sonraki soru butonu veya otomatik geçiş JS'te yönetilecek -->
+                 <p class="map-completion-message quiz-completion-message" style="display: none;"></p>
+             </div>
+
+        </div>
+    </section>
+
+    <!-- Konular ve İletişim bölümleri ana sayfada kalabilir veya buraya kopyalanabilir.
+         Şimdilik sadece oyun içeriğini koyup ana sayfaya geri dönüş linki verelim. -->
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 GeoQuest: Coğrafya Macerası Projesi</p>
+        </div>
+    </footer>
+
+    <script src="turkey-map-script.js"></script> <!-- Bu sayfaya özel JavaScript dosyası -->
+
+</body>
+</html>

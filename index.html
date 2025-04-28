@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoQuest: Coğrafya Macerası - Oyun Alanı</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>GeoQuest</h1>
+            <p class="site-slogan">Coğrafya Macerası</p>
+            <nav>
+                <ul>
+                    <li><a href="#oyun-alani">Oyun Alanı</a></li>
+                    <li><a href="#konular">Konular</a></li>
+                    <li><a href="#iletisim">İletişim</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Sadeleştirilmiş Giriş Bölümü -->
+    <section id="ana-sayfa" class="hero-section">
+        <div class="container">
+            <h2>Coğrafya Bilgini Oyunla Keşfet!</h2>
+            <p>GeoQuest'in interaktif oyunlarıyla coğrafyayı öğrenmenin keyfini çıkar.</p>
+            <div class="placeholder-image">Hoş Geldiniz Görseli</div>
+            <a href="#oyun-alani" class="btn">Oyunlara Başla!</a>
+        </div>
+    </section>
+
+    <!-- Oyun Alanı Bölümü - Türkiye Haritası Hariç Diğer Oyunlar -->
+    <section id="oyun-alani" class="section game-area-section">
+        <div class="container">
+            <h2>Oyun Alanı</h2>
+            <p>Aşağıdaki oyunları oynayarak coğrafya bilginizi test edin ve geliştirin. Her oyunun kendi soru havuzu vardır!</p>
+
+             <!-- Türkiye Haritası Oyununa Link -->
+             <div class="game-example map-game-link-example"> <!-- Yeni bir örnek kutusu -->
+                 <h3>Türkiye Haritası Görevi</h3>
+                 <p>Türkiye haritası üzerinde önemli coğrafi noktaları bulun.</p>
+                 <a href="turkey-map-game.html" class="btn">Oyunu Oyna</a> <!-- Yeni sayfaya link -->
+             </div>
+
+
+            <!-- Örnek 1: Başkent Bulma -->
+            <div class="game-example capital-quiz-example">
+                <h3>Başkent Bulma Oyunu</h3>
+                <p class="capital-quiz-country-prompt">Aşağıdaki ülkenin başkentini bulun:</p>
+                <p class="capital-quiz-country"></p>
+                <div class="quiz-options">
+                    <button class="quiz-btn"></button>
+                    <button class="quiz-btn"></button>
+                    <button class="quiz-btn"></button>
+                    <button class="quiz-btn"></button>
+                </div>
+                <p class="capital-feedback quiz-feedback"></p>
+                 <p class="capital-completion-message quiz-completion-message" style="display: none;"></p>
+            </div>
+
+             <!-- Örnek 3: Boşluk Doldurma -->
+             <div class="game-example fill-in-blank-example">
+                <h3>Boşluk Doldurma Oyunu</h3>
+                 <p><span class="blank-text-before"></span><input type="text" class="fill-in-blank-input" placeholder="Cevap"><span class="blank-text-after"></span></p>
+                 <button class="check-blank-btn">Kontrol Et</button>
+                 <p class="fill-in-blank-feedback"></p>
+                 <p class="blank-completion-message quiz-completion-message" style="display: none;"></p>
+             </div>
+
+             <!-- Örnek 4: Bayrak Tanıma -->
+             <div class="game-example flag-quiz-example">
+                <h3>Bayrak Tanıma Oyunu</h3>
+                <p class="flag-quiz-question">Bu bayrak hangi ülkeye aittir?</p>
+                <img src="" alt="Gösterilen Ülkenin Bayrağı" class="flag-image">
+                <div class="quiz-options">
+                     <button class="quiz-btn"></button>
+                     <button class="quiz-btn"></button>
+                     <button class="quiz-btn"></button>
+                     <button class="quiz-btn"></button>
+                 </div>
+                <p class="flag-feedback quiz-feedback"></p>
+                 <p class="flag-completion-message quiz-completion-message" style="display: none;"></p>
+             </div>
+
+             <!-- Örnek 5: Coğrafi Terim Tanımlama -->
+             <div class="game-example term-quiz-example">
+                <h3>Coğrafi Terim Oyunu</h3>
+                <p class="term-quiz-definition"></p>
+                 <div class="quiz-options">
+                     <button class="quiz-btn"></button>
+                     <button class="quiz-btn"></button>
+                     <button class="quiz-btn"></button>
+                     <button class="quiz-btn"></button>
+                 </div>
+                <p class="term-feedback quiz-feedback"></p>
+                 <p class="term-completion-message quiz-completion-message" style="display: none;"></p>
+             </div>
+
+        </div>
+    </section>
+
+    <section id="konular" class="section topics-section">
+        <div class="container">
+            <h2>Öğrenebileceğiniz Konular</h2>
+            <p>Oyunlarımızda işlenen bazı coğrafya konuları:</p>
+            <ul>
+                <li>Ülkeler ve Başkentleri</li>
+                <li>Türkiye Coğrafyası (iller, dağlar, nehirler vb.)</li>
+                <li>Fiziki Coğrafya Terimleri</li>
+                <li>Bayraklar</li>
+                <li>Genel Coğrafya Bilgileri</li>
+            </ul>
+        </div>
+    </section>
+
+     <section id="iletisim" class="section contact-section">
+        <div class="container">
+            <h2>İletişim</h2>
+            <p>Proje hakkında bilgi almak veya geri bildirimde bulunmak için bizimle iletişime geçebilirsiniz.</p>
+            <p>E-posta: <a href="mailto:info@geoquestproje.com">info@geoquestproje.com</a> (Örnek E-posta)</p>
+            <div class="contact-form-placeholder">
+                <p>[İletişim Formu Alanı - Statik Taslak]</p>
+                <p>Adınız, E-posta Adresiniz, Mesajınız alanları burada yer alabilir.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 GeoQuest: Coğrafya Macerası Projesi</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script> <!-- Ana script dosyası -->
+
+</body>
+</html>
