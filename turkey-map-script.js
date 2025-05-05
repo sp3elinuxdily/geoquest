@@ -1,6 +1,5 @@
-// *** Bu dosya SADECE Türkiye Haritası Görevi oyununa ait JavaScript kodunu içerir. ***
-// *** Ana oyun mantığı ve diğer quizler script.js dosyasındadır. ***
-// *** Bu kod hala tam bir oyun motoru değildir. Soru havuzu 10. sınıf müfredatına uygun olarak genişletildi. ***
+// *** Bu dosya SADECE Türkiye Volkanik Dağları Haritası Görevi oyununa ait JavaScript kodunu içerir. ***
+// *** Bu versiyon, harita görselini kullanır ve TÜM volkan konumlarını aynı anda gösterir. ***
 
 // Yardımcı Fonksiyon: Diziyi Karıştırma
 function shuffleArray(array) {
@@ -12,124 +11,304 @@ function shuffleArray(array) {
     return shuffled;
 }
 
-// Kısa bekleme süresi (ms)
-const displayNextQuestionDelay = 1500; // 1.5 saniye
+// Kısa bekleme süresi (ms) - Cevap verildikten sonraki bekleme
+const feedbackDisplayDelay = 2000; // Cevap verildikten sonra 2 saniye bekle
 
-// TÜRKİYE HARİTASI GÖREVLERİ HAVUZU
-// Dikkat: Koordinatlar (top, left) kullanılan harita görseline göre manuel olarak ayarlanmıştır.
-// Farklı bir harita görseli kullanırsanız bu koordinatları ayarlamanız gerekir.
-// 10. sınıf müfredatına uygun yerler ve volkanlar eklendi.
-const turkeyMapQuestions = [
-    { locationName: 'Ankara', hotspotCoords: { top: '42%', left: '55%' } },
-    { locationName: 'İstanbul', hotspotCoords: { top: '34%', left: '43%' } },
-    { locationName: 'İzmir', hotspotCoords: { top: '50%', left: '28%' } },
-    { locationName: 'Akdeniz', hotspotCoords: { top: '85%', left: '50%' } }, // Deniz konumu temsili
-    { locationName: 'Karadeniz', hotspotCoords: { top: '15%', left: '65%' } }, // Deniz konumu temsili
-    { locationName: 'Ege Denizi', hotspotCoords: { top: '65%', left: '20%' } }, // Deniz konumu temsili
-    { locationName: 'Marmara Denizi', hotspotCoords: { top: '40%', left: '38%' } }, // Deniz konumu temsili
-    { locationName: 'Erciyes Dağı', hotspotCoords: { top: '47%', left: '62%' } }, // Kayseri civarı temsili - Volkanik Dağ
-    { locationName: 'Van Gölü', hotspotCoords: { top: '48%', left: '85%' } }, // Van Gölü temsili - Volkanik set gölü
-    { locationName: 'Fırat Nehri (Başlangıç)', hotspotCoords: { top: '38%', left: '75%' } }, // Doğu Anadolu temsili
-    { locationName: 'Gediz Nehri (Döküldüğü Yer)', hotspotCoords: { top: '53%', left: '28%' } }, // İzmir Körfezi'ne döküldüğü yer temsili
-    { locationName: 'Çukurova Deltası', hotspotCoords: { top: '68%', left: '55%' } }, // Adana civarı temsili - Delta Ovası
-    { locationName: 'Uludağ', hotspotCoords: { top: '37%', left: '39%' } }, // Bursa civarı temsili - Volkanik değil, kıvrım/masif dağ
-    { locationName: 'Tuz Gölü', hotspotCoords: { top: '48%', left: '52%' } }, // Tuz Gölü temsili - Tektonik Göl
-    { locationName: 'Antalya Körfezi', hotspotCoords: { top: '72%', left: '45%' } }, // Antalya Körfezi temsili - Körfez
-     { locationName: 'Doğu Anadolu Bölgesi (Merkezi)', hotspotCoords: { top: '40%', left: '80%' } }, // Bölge temsili
-     { locationName: 'İç Anadolu Bölgesi (Merkezi)', hotspotCoords: { top: '45%', left: '50%' } }, // Bölge temsili
-     { locationName: 'Karadeniz Bölgesi (Doğu)', hotspotCoords: { top: '20%', left: '80%' } }, // Bölge temsili
-     { locationName: 'Akdeniz Bölgesi (Batı)', hotspotCoords: { top: '70%', left: '38%' } }, // Bölge temsili
-     { locationName: 'Gap Bölgesi (Merkezi)', hotspotCoords: { top: '65%', left: '75%' } }, // Bölge temsili
-     // Yeni Türkiye Harita Soruları (10. sınıf müfredatına uygun)
-     { locationName: 'Ağrı Dağı', hotspotCoords: { top: '38%', left: '90%' } }, // Doğu Anadolu - Volkanik Dağ
-     { locationName: 'Nemrut Kalderası (Bitlis)', hotspotCoords: { top: '45%', left: '85%' } }, // Bitlis - Volkanik Dağ & Kaldera
-     { locationName: 'Süphan Dağı', hotspotCoords: { top: '45%', left: '87%' } }, // Van Gölü kuzeyi - Volkanik Dağ
-     { locationName: 'Hasan Dağı', hotspotCoords: { top: '50%', left: '57%' } }, // Aksaray civarı - Volkanik Dağ
-     { locationName: 'Meke Gölü (Acıgöl)', hotspotCoords: { top: '52%', left: '54%' } }, // Konya Karapınar - Maar Gölü
-     { locationName: 'Salda Gölü', hotspotCoords: { top: '60%', left: '35%' } }, // Burdur - Tektonik Göl (Önemli jeolojik yapısı var)
-     { locationName: 'Manyas (Kuş) Gölü', hotspotCoords: { top: '37%', left: '32%' } }, // Balıkesir - Tektonik Göl
-     { locationName: 'Bafa Gölü', hotspotCoords: { top: '62%', left: '25%' } }, // Aydın/Muğla - Alüvyal Set Gölü (eski körfez)
-     { locationName: 'Kızılırmak Nehri (Delta)', hotspotCoords: { top: '35%', left: '65%' } }, // Bafra Deltası - Delta Ovası
-     { locationName: 'Sakarya Nehri (Denize Döküldüğü Yer)', hotspotCoords: { top: '35%', left: '45%' } }, // Karasu civarı
-     { locationName: 'Toros Dağları (Orta Toroslar)', hotspotCoords: { top: '60%', left: '52%' } }, // Akdeniz Bölgesi içi
-     { locationName: 'Kaçkar Dağları', hotspotCoords: { top: '25%', left: '80%' } }, // Doğu Karadeniz
-     { locationName: 'Amanos Dağları (Nur Dağları)', hotspotCoords: { top: '70%', left: '60%' } }, // Hatay civarı
-     { locationName: 'Yıldız (Istranca) Dağları', hotspotCoords: { top: '20%', left: '38%' } }, // Trakya'nın kuzeyi
-     { locationName: 'Erzurum-Kars Platosu', hotspotCoords: { top: '35%', left: '85%' } } // Doğu Anadolu
+// TÜRKİYE VOLKANİK DAĞLARI GÖREVLERİ HAVUZU
+// Dikkat: Koordinatlar, sizin sağladığınız son listeye ve muhtemelen 'image_edce81.jpg' görseline göre manuel olarak oluşturulmuştur.
+// Bu dizi YALNIZCA o görselde işaretli ve sizin belirttiğiniz dağları içermektedir.
+const turkeyVolcanoQuestions = [ // Sadece volkanları içeren liste
+    { locationName: 'Ağrı Dağı', hotspotCoords: { top: '28%', left: '95%' } }, // image_edce81.jpg tahmini
+    { locationName: 'Süphan', hotspotCoords: { top: '41%', left: '90%' } }, // image_edce81.jpg tahmini
+    { locationName: 'Nemrut (Bitlis)', hotspotCoords: { top: '43%', left: '89%' } }, // image_edce81.jpg tahmini
+    { locationName: 'Tendürek', hotspotCoords: { top: '34%', left: '94%' } }, // image_edce81.jpg tahmini
+    { locationName: 'Erciyes', hotspotCoords: { top: '48%', left: '50%' } }, // image_edce81.jpg tahmini
+    { locationName: 'Melendiz', hotspotCoords: { top: '55%', left: '46%' } }, // image_edce81.jpg tahmini
+    { locationName: 'Hasan D.', hotspotCoords: { top: '53%', left: '44%' } }, // image_edce81.jpg tahmini (Hasan Dağı)
+    { locationName: 'Karadağ (Karaman)', hotspotCoords: { top: '61%', left: '38%' } }, // image_edce81.jpg tahmini
+    { locationName: 'Karacadağ (Merkez)', hotspotCoords: { top: '56%', left: '42%' } }, // image_edce81.jpg tahmini (İç Anadolu'ya yakın olan)
+    { locationName: 'Karacadağ (Doğu)', hotspotCoords: { top: '56%', left: '74%' } }, // image_edce81.jpg tahmini (Diyarbakır/Şanlıurfa civarı olan)
+    { locationName: 'Kula Konileri', hotspotCoords: { top: '55%', left: '20%' } }, // image_edce81.jpg tahmini (Kula Volkanları alanı)
+    // BURAYA { locationName: 'Yeni Dağ Adı', hotspotCoords: { top: 'Y%', left: 'X%' } }, şeklinde yeni yanardağlar ekleyebilirsiniz.
+    // Y ve X değerlerini kullanacağınız harita görseline bakarak belirlemelisiniz.
 ];
 
-const mapChallengeExample = document.querySelector('.map-challenge-example');
-// Sayfanın Türkiye Haritası sayfası olduğundan emin olalım
-if(mapChallengeExample){
-    const mapChallengeDescriptionElement = mapChallengeExample.querySelector('.map-challenge-description');
-    const turkeyMapContainer = mapChallengeExample.querySelector('.turkey-map-container');
-    const mapHotspotElement = mapChallengeExample.querySelector('.map-hotspot');
-    const mapChallengeFeedbackElement = mapChallengeExample.querySelector('.map-challenge-feedback');
-    const mapCompletionMessageElement = mapChallengeExample.querySelector('.map-completion-message');
-    let currentTurkeyMapIndex = 0;
-    let shuffledTurkeyMapQuestions = shuffleArray(turkeyMapQuestions); // Görevleri karıştır
 
-    function displayTurkeyMapChallenge(index) {
-        if (index < shuffledTurkeyMapQuestions.length) {
-            const question = shuffledTurkeyMapQuestions[index];
+// --- Element Seçimi ---
+const mapChallengeExample = document.querySelector('.map-challenge-example'); // Ana oyun kutusu (Harita görselini ve hotspotları içeren div)
+let mapChallengeDescriptionElement, turkeyMapContainer, mapChallengeFeedbackElement, mapCompletionMessageElement, turkeyMapImage;
 
-            mapChallengeDescriptionElement.textContent = `Haritada gösterilmesi istenen yer: ${question.locationName}`;
-            mapChallengeFeedbackElement.textContent = ''; // Geri bildirimi temizle
-            mapHotspotElement.style.display = 'block'; // Hotspotu görünür yap
-            mapHotspotElement.dataset.clicked = 'false'; // Hotspotun tıklanıp tıklanmadığını takip et
+// Ana konteyner bulunduğunda içindeki elementleri seç
+if (mapChallengeExample) {
+    mapChallengeDescriptionElement = mapChallengeExample.querySelector('.map-challenge-description');
+    turkeyMapContainer = mapChallengeExample.querySelector('.turkey-map-container'); // Hotspotları buraya ekleyeceğiz
+    mapChallengeFeedbackElement = mapChallengeExample.querySelector('.map-challenge-feedback');
+    mapCompletionMessageElement = mapChallengeExample.querySelector('.map-completion-message');
 
-            // Hotspotun konumunu ayarla
-            mapHotspotElement.style.top = question.hotspotCoords.top;
-            mapHotspotElement.style.left = question.hotspotCoords.left;
-
-            // Hotspotun data attribute'ine doğru cevabı sakla
-            mapHotspotElement.dataset.correctLocation = question.locationName;
-
-
-        } else {
-            // Görevler bitti
-            mapChallengeDescriptionElement.textContent = '';
-            mapHotspotElement.style.display = 'none'; // Hotspotu gizle
-            mapChallengeFeedbackElement.textContent = '';
-
-            mapCompletionMessageElement.textContent = `Tebrikler! Türkiye Harita Görevlerini tamamladınız. ${shuffledTurkeyMapQuestions.length} sorunun tamamını çözdünüz.`;
-            mapCompletionMessageElement.style.color = '#00796b';
-            mapCompletionMessageElement.style.display = 'block';
-
-             // İsteğe bağlı: Yeniden başlatma seçeneği eklenebilir
-        }
+    // Harita konteyneri bulunduğunda içindeki görseli seç
+    if (turkeyMapContainer) {
+        turkeyMapImage = turkeyMapContainer.querySelector('.turkey-map-image');
+        // Tek hotspot elementi artık HTML'de yok, dinamik oluşturulacak
     }
-
-    // Harita hotspotuna tıklama olayı
-    // Olay dinleyicisini sadece bir kere ekle
-    mapHotspotElement.addEventListener('click', function() {
-        // Eğer hotspot zaten tıklanmışsa tekrar işlem yapma
-        if (this.dataset.clicked === 'true') {
-            return;
-        }
-        this.dataset.clicked = 'true'; // Tıklandı olarak işaretle
-
-
-        const correctLocation = this.dataset.correctLocation;
-        mapChallengeFeedbackElement.textContent = `Haritada ${correctLocation} konumunu işaretlediniz. Doğru!`;
-        mapChallengeFeedbackElement.style.color = 'green';
-        // Hotspotu gizleme veya görselini değiştirme isteğe bağlı
-        // mapHotspotElement.style.display = 'none';
-
-         setTimeout(() => {
-             currentTurkeyMapIndex++;
-             displayTurkeyMapChallenge(currentTurkeyMapIndex);
-         }, displayNextQuestionDelay);
-    });
-
-    // Türkiye Harita görevini başlat (Sayfa yüklendiğinde veya görsel yüklendikten sonra)
-    const turkeyMapImage = turkeyMapContainer.querySelector('.turkey-map-image');
-    if (turkeyMapImage && turkeyMapImage.complete) { // Görsel var ve yüklenmişse
-        displayTurkeyMapChallenge(currentTurkeyMapIndex);
-    } else if (turkeyMapImage) { // Görsel varsa ama yüklenmemişse
-        turkeyMapImage.addEventListener('load', () => {
-            displayTurkeyMapChallenge(currentTurkeyMapIndex);
-        });
-    }
-    // Eğer turkeyMapImage bulunamazsa (sayfa yanlış), hiçbir şey olmaz.
 }
+
+
+// --- Oyun Durumu ve Yönetimi ---
+let currentVolcanoQuestionIndex = 0; // Volkan oyunu için soru indexi
+let shuffledVolcanoQuestions = []; // Oyun sırasında sorulacak volkanlar listesi (turkeyVolcanoQuestions listesinin karıştırılmış hali)
+let isProcessingClick = false; // Tıklama işleminin devam edip etmediğini kontrol et (birden çok tıklamayı engeller)
+
+
+// Oyun Başlatma/Hazırlık
+function startVolcanoMapGame() { // Volkan oyunu için başlangıç fonksiyonu
+    console.log("startVolcanoMapGame çağrıldı."); // Konsol kaydı
+
+     // Gerekli tüm elementlerin HTML'de var olduğunu kontrol et
+     if (!mapChallengeExample || !mapChallengeDescriptionElement || !turkeyMapContainer || !mapChallengeFeedbackElement || !mapCompletionMessageElement || !turkeyMapImage) {
+         console.error("Türkiye Volkan Haritası oyunu başlatılamadı: Gerekli elementler eksik. HTML yapısını kontrol edin."); // Hata kaydı
+         if(mapChallengeFeedbackElement) {
+             mapChallengeFeedbackElement.textContent = "Oyun yüklenirken bir hata oluştu (Elementler eksik). Lütfen konsolu kontrol edin.";
+             mapChallengeFeedbackElement.style.color = 'red';
+         }
+         return; // Elementler yoksa fonksiyonu çalıştırma
+     }
+
+     // Sorulacak volkanları belirle ve karıştır (Listenin bir kopyasını alıp karıştırıyoruz)
+     shuffledVolcanoQuestions = shuffleArray([...turkeyVolcanoQuestions]);
+     currentVolcanoQuestionIndex = 0; // Soru sayacını sıfırla
+
+     mapCompletionMessageElement.style.display = 'none'; // Önceki oyunun bitiş mesajını gizle
+     mapChallengeFeedbackElement.textContent = ''; // Önceki geri bildirimi temizle
+
+     // Harita görselinin yüklenmesini bekle, sonra hotspotları oluştur ve oyunu başlat
+     if (turkeyMapImage.complete) { // Görsel zaten yüklenmişse
+         console.log("Harita görseli zaten yüklü."); // Konsol kaydı
+         setupHotspotsAndStartVolcanoGame(); // Hotspotları oluştur ve oyunu başlat
+     } else { // Görsel henüz yüklenmemişse
+         console.log("Harita görseli yükleniyor, bekle."); // Konsol kaydı
+         turkeyMapImage.addEventListener('load', () => {
+             console.log("Harita görseli yüklendi."); // Konsol kaydı
+             setupHotspotsAndStartVolcanoGame(); // Hotspotları oluştur ve oyunu başlat
+         });
+          // Görsel yüklenemezse hata logla ve kullanıcıya bildir
+         turkeyMapImage.addEventListener('error', () => {
+             console.error("HATA: Türkiye Harita görseli yüklenemedi:", turkeyMapImage.src); // Hata kaydı
+             if(mapChallengeFeedbackElement) {
+                 mapChallengeFeedbackElement.textContent = "Harita görseli yüklenemedi. Lütfen daha sonra tekrar deneyin veya internet bağlantınızı kontrol edin.";
+                 mapChallengeFeedbackElement.style.color = 'red';
+                 // Harita alanı tıklanamaz olsun ki oyun oynanmaya çalışılmasın
+                 if(turkeyMapContainer) turkeyMapContainer.style.pointerEvents = 'none';
+                 console.log("Görsel yükleme hatası nedeniyle oyun devre dışı bırakıldı."); // Konsol kaydı
+             }
+         });
+     }
+}
+
+// Hotspotları Haritaya Yerleştirme, Tıklama Dinleyicisini Ekleme ve Oyunu Başlatma
+function setupHotspotsAndStartVolcanoGame() { // Kurulum fonksiyonu
+     console.log("setupHotspotsAndStartVolcanoGame çağrıldı. Hotspotlar oluşturuluyor."); // Konsol kaydı
+     // Gerekli elementlerin hala var olduğunu kontrol et
+     if (!mapChallengeExample || !turkeyMapContainer) {
+          console.error("HATA: Hotspot kurulumu için gerekli elementler eksik (.map-challenge-example veya .turkey-map-container)."); // Hata kaydı
+          return;
+     }
+
+    // Önceki hotspotları temizle (Sayfa yenilenmeden tekrar başlatılırsa)
+    mapChallengeExample.querySelectorAll('.map-hotspot').forEach(hotspot => hotspot.remove());
+    console.log("Mevcut hotspotlar temizlendi."); // Konsol kaydı
+
+
+    // Her volkan konumu için bir hotspot oluştur, konumlandır ve haritaya ekle
+    turkeyVolcanoQuestions.forEach((locationData, index) => { // Volkan listesini kullanıyoruz
+        const hotspot = document.createElement('div');
+        hotspot.classList.add('map-hotspot'); // CSS stil sınıfı
+
+        // Her hotspota hangi volkan konumunu temsil ettiğini belirten bir data attribute ekle
+        // Bu, tıklama olayında hangi noktanın tıklandığını anlamamızı sağlar
+        hotspot.dataset.locationName = locationData.locationName;
+
+        // Konumunu ayarla (Koordinatları kullan)
+        hotspot.style.top = locationData.hotspotCoords.top;
+        hotspot.style.left = locationData.hotspotCoords.left;
+
+        // Hotspotu görünür yap (CSS'inizde başlangıçta display: none olabilir)
+        hotspot.style.display = 'block'; // veya 'flex' vb. hotspotun nasıl görünmesini istiyorsanız
+
+
+        // Oluşturulan hotspotu harita konteynerine ekle
+        if(turkeyMapContainer) {
+            turkeyMapContainer.appendChild(hotspot);
+        } else {
+             console.error("HATA: Hotspotlar eklenemiyor, .turkey-map-container elementi bulunamadı."); // Hata kaydı
+             // Konteyner yoksa hata mesajı gösterilmeli ve oyun başlatılmamalı
+             if(mapChallengeFeedbackElement) {
+                 mapChallengeFeedbackElement.textContent = "Oyun kurulum hatası (Harita alanı bulunamadı).";
+                 mapChallengeFeedbackElement.style.color = 'red';
+             }
+             return; // Konteyner yoksa bu fonksiyonu burada bitir
+        }
+    });
+    console.log(`${turkeyVolcanoQuestions.length} adet hotspot oluşturuldu ve haritaya eklendi.`); // Konsol kaydı
+
+
+    // Tek bir olay dinleyicisini harita konteynerine ekle (Event Delegation)
+    // Bu yöntem, her bir hotspota ayrı ayrı tıklama dinleyicisi eklemek yerine daha verimlidir.
+    // Tıklama olayı konteynerde yakalanır ve olayın nereden geldiği bulunur.
+    // Listener'ı sadece bir kere eklediğimizden emin olalım (Sayfa yenilenmeden fonksiyon tekrar çağrılırsa)
+    if(turkeyMapContainer && !turkeyMapContainer.dataset.listenerAdded) {
+         turkeyMapContainer.addEventListener('click', handleHotspotClick);
+         turkeyMapContainer.dataset.listenerAdded = 'true'; // Listener eklendiğini işaretle
+         console.log("Harita konteynerine tıklama event listener'ı eklendi."); // Konsol kaydı
+    } else if (turkeyMapContainer) {
+        console.log("Harita konteyneri bulundu ancak listener zaten eklenmiş."); // Konsol kaydı
+         // Hotspotlar eklendi, konteyner tıklanabilir hale getirilmeli (eğer hata nedeniyle devre dışı kaldıysa)
+         turkeyMapContainer.style.pointerEvents = 'auto';
+    }
+
+
+    // Hotspotlar haritaya yerleştirildi. Şimdi ilk soruyu göstererek oyunu başlat
+    displayCurrentVolcanoQuestion(); // İlk soruyu gösterme fonksiyonunu çağır
+}
+
+// Tıklama olayını yöneten fonksiyon (Event Delegation tarafından yakalanan tıklamaları işler)
+function handleHotspotClick(event) {
+    console.log("Harita konteynerinde tıklama algılandı."); // Konsol kaydı
+     // Eğer tıklama işleniyorsa (yani önceki cevabın geri bildirimi bekleniyorsa) yeni tıklamayı yoksay
+    if (isProcessingClick) {
+        console.log("Tıklama işlemi devam ediyor, yeni tıklama yoksayılıyor."); // Konsol kaydı
+        return;
+    }
+
+    // Tıklanan elementin bir hotspot olup olmadığını kontrol et
+    // event.target en içteki tıklanan elementtir. .closest('.map-hotspot') ile en yakın ebeveyn hotspota bakarız.
+    const clickedHotspot = event.target.closest('.map-hotspot');
+
+    // Eğer tıklanan element bir hotspot değilse (örneğin haritanın boş bir yerine tıklandıysa) dur
+    if (!clickedHotspot) {
+        console.log("Tıklanan hotspot elementi değil (Haritanın boş alanına tıklandı)."); // Konsol kaydı
+        // İsteğe bağlı olarak "Yanlış yer!" gibi bir geri bildirim verilebilir.
+        // mapChallengeFeedbackElement.textContent = "Bir noktaya tıklayın.";
+        // mapChallengeFeedbackElement.style.color = 'orange';
+        return;
+    }
+
+    // Tıklanan element bir hotspot! Tıklama işlemeye başla
+    isProcessingClick = true;
+     console.log("Hotspot tıklaması işleniyor..."); // Konsol kaydı
+
+    // Tıklanan hotspotun temsil ettiği konumun adını al
+    const clickedLocationName = clickedHotspot.dataset.locationName;
+    // Şu anki sorunun doğru cevabını al
+    const currentCorrectLocation = shuffledVolcanoQuestions[currentVolcanoQuestionIndex].locationName; // Karıştırılmış sorulardan doğru cevabı al
+
+    console.log("Tıklanan Hotspot:", clickedLocationName, "Doğru cevap:", currentCorrectLocation); // Konsol kaydı
+
+    // Geri bildirim alanını temizle
+    mapChallengeFeedbackElement.textContent = '';
+    // Tüm hotspotlardan önceki geri bildirim sınıflarını (doğru/yanlış renkleri) temizle
+     mapChallengeExample.querySelectorAll('.map-hotspot').forEach(h => h.classList.remove('correct', 'wrong'));
+
+
+    if (clickedLocationName === currentCorrectLocation) {
+        // Doğru Cevap!
+        console.log("Doğru cevap!"); // Konsol kaydı
+        clickedHotspot.classList.add('correct'); // Tıklanan hotspota doğru stilini ekle
+        mapChallengeFeedbackElement.textContent = `Doğru! Burası ${currentCorrectLocation}.`;
+        mapChallengeFeedbackElement.style.color = 'green';
+        // Skoru artırma mantığı buraya eklenebilir (eğer puanlama sistemi varsa)
+
+    } else {
+        // Yanlış Cevap!
+        console.log("Yanlış cevap!"); // Konsol kaydı
+        clickedHotspot.classList.add('wrong'); // Tıklanan hotspota yanlış stilini ekle
+        mapChallengeFeedbackElement.textContent = `Yanlış. Doğru cevap ${currentCorrectLocation} idi.`;
+        mapChallengeFeedbackElement.style.color = 'red';
+
+        // Kullanıcıya doğru hotspotu da gösterelim (doğru olana yeşil stil ekle)
+        // Doğru hotspotun dataset.locationName'i currentCorrectLocation ile eşleşen hotspotu bul
+        const correctHotspotElement = mapChallengeExample.querySelector(`.map-hotspot[data-location-name="${currentCorrectLocation}"]`);
+        if(correctHotspotElement) {
+            correctHotspotElement.classList.add('correct'); // Doğru olana yeşil stilini ekle
+             console.log("Doğru hotspot işaretlendi."); // Konsol kaydı
+        } else {
+             console.error("HATA: Doğru hotspota karşılık gelen element bulunamadı (data-location-name:", currentCorrectLocation, "). Listenizi ve element data attribute'lerini kontrol edin."); // Hata kaydı
+        }
+    }
+
+    // Kısa bir gecikmeden sonra bir sonraki soruya geçişi yönet
+    setTimeout(() => {
+        // Geri bildirim sınıflarını hotspotlardan kaldır (bir sonraki soruya geçerken temiz kalsınlar)
+        mapChallengeExample.querySelectorAll('.map-hotspot').forEach(h => h.classList.remove('correct', 'wrong'));
+
+        currentVolcanoQuestionIndex++; // Bir sonraki soruya geç
+
+        // Tıklama işlemeyi serbest bırak (Yeni tıklamaları kabul etmeye başla)
+        isProcessingClick = false;
+
+        // Yeni soruyu göster veya oyun bittiyse bitir
+        if (currentVolcanoQuestionIndex < shuffledVolcanoQuestions.length) {
+            displayCurrentVolcanoQuestion(); // Yeni soruyu gösterme fonksiyonunu çağır
+        } else {
+            endVolcanoMapGame(); // Tüm sorular bitti, oyunu bitir
+        }
+    }, feedbackDisplayDelay); // Belirlenen gecikme süresi kadar bekle
+}
+
+
+// Mevcut soruyu göster (Sadece soru metni değişir, hotspotlar zaten haritada görünürdür)
+function displayCurrentVolcanoQuestion() { // Mevcut soruyu görüntüleme fonksiyonu
+     console.log("displayCurrentVolcanoQuestion çağrıldı, şu anki soru indexi:", currentVolcanoQuestionIndex); // Konsol kaydı
+     // Eğer tüm sorular sorulduysa, oyunu bitir
+     if (currentVolcanoQuestionIndex >= shuffledVolcanoQuestions.length) {
+          endVolcanoMapGame(); // Oyun bitirme fonksiyonunu çağır
+          return;
+     }
+
+     // Şu anki soruyu (karıştırılmış listeden) al
+     const currentQuestion = shuffledVolcanoQuestions[currentVolcanoQuestionIndex];
+     // Oyun alanındaki soru metnini güncelle
+     mapChallengeDescriptionElement.textContent = `Haritada gösterilmesi istenen volkanik dağ: ${currentQuestion.locationName}`; // Soru metni güncellendi
+     // Geri bildirim alanını temizle
+     mapChallengeFeedbackElement.textContent = '';
+     console.log("Soru metni güncellendi:", currentQuestion.locationName); // Konsol kaydı
+
+     // Tüm hotspotların tıklanabilir olduğundan emin olmak için (isProcessingClick false olduğunda zaten tıklanabilirler)
+     // Görsel olarak tüm hotspotlar zaten görünür durumda kalır.
+}
+
+
+// Oyunu Bitir
+function endVolcanoMapGame() { // Oyun bitirme fonksiyonu
+    console.log("endVolcanoMapGame çağrıldı."); // Konsol kaydı
+     // Gerekli elementlerin var olduğunu kontrol et
+     if (!mapChallengeExample || !mapCompletionMessageElement || !turkeyMapContainer) return;
+
+    // Soru metnini ve geri bildirimi temizle
+    mapChallengeDescriptionElement.textContent = '';
+    mapChallengeFeedbackElement.textContent = '';
+
+    // Tüm hotspotları haritadan kaldır veya gizle (tercihe göre)
+    mapChallengeExample.querySelectorAll('.map-hotspot').forEach(hotspot => hotspot.style.display = 'none'); // Hotspotları gizle (remove() da kullanılabilir)
+    console.log("Tüm hotspotlar gizlendi."); // Konsol kaydı
+
+    // Oyun tamamlama mesajını göster
+    // shuffledVolcanoQuestions.length, sorulan toplam soru sayısıdır.
+    mapCompletionMessageElement.textContent = `Tebrikler! Türkiye Volkanik Dağları Görevini tamamladınız. ${shuffledVolcanoQuestions.length} sorunun tamamını çözdünüz.`; // Bitiş mesajı
+    mapCompletionMessageElement.style.color = '#00796b';
+    mapCompletionMessageElement.style.display = 'block';
+
+     // Harita konteynerinin tıklanamaz olduğundan emin ol (oyun bittikten sonra)
+     turkeyMapContainer.style.pointerEvents = 'none';
+     console.log("Harita alanı tıklanamaz hale getirildi."); // Konsol kaydı
+
+
+     // İsteğe bağlı: Oyunu yeniden başlatma butonu eklemek isterseniz buraya logic eklenir.
+     // Şu an yeniden başlatma sayfa yenilenerek yapılabilir.
+}
+
+
+// Sayfa yüklendiğinde oyunun başlangıç fonksiyonunu çağır
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("DOMContentLoaded - Oyun başlatılıyor."); // Konsol kaydı
+    startVolcanoMapGame(); // Oyun başlatma fonksiyonunu çağır
+});

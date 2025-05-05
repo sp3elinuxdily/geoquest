@@ -22,84 +22,51 @@
         </div>
     </header>
 
-    <!-- Sadeleştirilmiş Giriş Bölümü -->
     <section id="ana-sayfa" class="hero-section">
         <div class="container">
             <h2>Coğrafya Bilgini Oyunla Keşfet!</h2>
             <p>GeoQuest'in interaktif oyunlarıyla coğrafyayı öğrenmenin keyfini çıkar.</p>
-            <div class="placeholder-image">Hoş Geldiniz Görseli</div>
+            <img src="pasted-image.png" alt="GeoQuest Hoş Geldiniz" style="max-width: 40%; height: auto; margin: 30px auto; display: block; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
             <a href="#oyun-alani" class="btn">Oyunlara Başla!</a>
         </div>
     </section>
 
-    <!-- Oyun Alanı Bölümü - Türkiye Haritası Hariç Diğer Oyunlar -->
     <section id="oyun-alani" class="section game-area-section">
         <div class="container">
             <h2>Oyun Alanı</h2>
-            <p>Aşağıdaki oyunları oynayarak coğrafya bilginizi test edin ve geliştirin. Her oyunun kendi soru havuzu vardır!</p>
+            <p>Aşağıdaki oyunları oynayarak coğrafya bilginizi test edin ve geliştirin.</p>
 
-             <!-- Türkiye Haritası Oyununa Link -->
-             <div class="game-example map-game-link-example"> <!-- Yeni bir örnek kutusu -->
-                 <h3>Türkiye Haritası Görevi</h3>
-                 <p>Türkiye haritası üzerinde önemli coğrafi noktaları bulun.</p>
-                 <a href="turkey-map-game.html" class="btn">Oyunu Oyna</a> <!-- Yeni sayfaya link -->
-             </div>
-
-
-            <!-- Örnek 1: Başkent Bulma -->
-            <div class="game-example capital-quiz-example">
-                <h3>Başkent Bulma Oyunu</h3>
-                <p class="capital-quiz-country-prompt">Aşağıdaki ülkenin başkentini bulun:</p>
-                <p class="capital-quiz-country"></p>
-                <div class="quiz-options">
-                    <button class="quiz-btn"></button>
-                    <button class="quiz-btn"></button>
-                    <button class="quiz-btn"></button>
-                    <button class="quiz-btn"></button>
-                </div>
-                <p class="capital-feedback quiz-feedback"></p>
-                 <p class="capital-completion-message quiz-completion-message" style="display: none;"></p>
+            <div class="game-example map-game-link-example">
+                <h3>Türkiye Volkanik Dağları Görevi</h3>
+                <p>Türkiye haritası üzerinde volkanik dağların yerlerini bulun.</p>
+                <a href="turkey-map-game.html" class="btn">Oyunu Oyna</a>
             </div>
 
-             <!-- Örnek 3: Boşluk Doldurma -->
-             <div class="game-example fill-in-blank-example">
+             <div class="game-example capital-quiz-link-example">
+                <h3>Başkent Bulma Oyunu</h3>
+                <p>Ülkelerin başkentlerini ne kadar iyi biliyorsun?</p>
+                <a href="capital-quiz-game.html" class="btn">Oyunu Oyna</a>
+            </div>
+
+             <div class="game-example fill-in-blank-link-example">
                 <h3>Boşluk Doldurma Oyunu</h3>
-                 <p><span class="blank-text-before"></span><input type="text" class="fill-in-blank-input" placeholder="Cevap"><span class="blank-text-after"></span></p>
-                 <button class="check-blank-btn">Kontrol Et</button>
-                 <p class="fill-in-blank-feedback"></p>
-                 <p class="blank-completion-message quiz-completion-message" style="display: none;"></p>
-             </div>
+                <p>Coğrafi bilgilerle cümlelerdeki boşlukları doldur.</p>
+                <a href="fill-in-blank-game.html" class="btn">Oyunu Oyna</a>
+            </div>
 
-             <!-- Örnek 4: Bayrak Tanıma -->
-             <div class="game-example flag-quiz-example">
+             <div class="game-example flag-quiz-link-example">
                 <h3>Bayrak Tanıma Oyunu</h3>
-                <p class="flag-quiz-question">Bu bayrak hangi ülkeye aittir?</p>
-                <img src="" alt="Gösterilen Ülkenin Bayrağı" class="flag-image">
-                <div class="quiz-options">
-                     <button class="quiz-btn"></button>
-                     <button class="quiz-btn"></button>
-                     <button class="quiz-btn"></button>
-                     <button class="quiz-btn"></button>
-                 </div>
-                <p class="flag-feedback quiz-feedback"></p>
-                 <p class="flag-completion-message quiz-completion-message" style="display: none;"></p>
-             </div>
+                <p>Dünya ülkelerinin bayraklarını tanı!</p>
+                <a href="flag-quiz-game.html" class="btn">Oyunu Oyna</a>
+            </div>
 
-             <!-- Örnek 5: Coğrafi Terim Tanımlama -->
-             <div class="game-example term-quiz-example">
+             <div class="game-example term-quiz-link-example">
                 <h3>Coğrafi Terim Oyunu</h3>
-                <p class="term-quiz-definition"></p>
-                 <div class="quiz-options">
-                     <button class="quiz-btn"></button>
-                     <button class="quiz-btn"></button>
-                     <button class="quiz-btn"></button>
-                     <button class="quiz-btn"></button>
-                 </div>
-                <p class="term-feedback quiz-feedback"></p>
-                 <p class="term-completion-message quiz-completion-message" style="display: none;"></p>
-             </div>
+                <p>Coğrafi terimlerin anlamlarını öğren ve test et.</p>
+                <a href="term-quiz-game.html" class="btn">Oyunu Oyna</a>
+            </div>
 
-        </div>
+            </div>
     </section>
 
     <section id="konular" class="section topics-section">
@@ -113,28 +80,14 @@
                 <li>Bayraklar</li>
                 <li>Genel Coğrafya Bilgileri</li>
             </ul>
+
         </div>
     </section>
 
-     <section id="iletisim" class="section contact-section">
-        <div class="container">
-            <h2>İletişim</h2>
-            <p>Proje hakkında bilgi almak veya geri bildirimde bulunmak için bizimle iletişime geçebilirsiniz.</p>
-            <p>E-posta: <a href="mailto:info@geoquestproje.com">info@geoquestproje.com</a> (Örnek E-posta)</p>
-            <div class="contact-form-placeholder">
-                <p>[İletişim Formu Alanı - Statik Taslak]</p>
-                <p>Adınız, E-posta Adresiniz, Mesajınız alanları burada yer alabilir.</p>
-            </div>
-        </div>
-    </section>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2023 GeoQuest: Coğrafya Macerası Projesi</p>
-        </div>
-    </footer>
 
-    <script src="script.js"></script> <!-- Ana script dosyası -->
+    <script src="script.js"></script>
 
 </body>
 </html>
+

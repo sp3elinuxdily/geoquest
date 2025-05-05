@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoQuest: Bayrak Tanıma Oyunu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>GeoQuest</h1>
+            <p class="site-slogan">Coğrafya Macerası</p>
+            <nav>
+                <ul>
+                    <li><a href="index.html#oyun-alani">Oyun Alanına Geri Dön</a></li>
+                    <li><a href="index.html#konular">Konular</a></li>
+                    <li><a href="index.html#iletisim">İletişim</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="flag-quiz-section" class="section game-area-section">
+        <div class="container">
+            <h2>Bayrak Tanıma Oyunu</h2>
+            <p>Gösterilen bayrağın hangi ülkeye ait olduğunu bulun ve doğru seçeneğe tıklayın.</p>
+
+            <div class="game-example flag-quiz-example">
+                <h3>Bu Bayrak Hangi Ülkenin?</h3>
+                <p class="flag-quiz-question">Bu bayrak hangi ülkeye aittir?</p>
+                <img src="" alt="Gösterilen Ülkenin Bayrağı" class="flag-image">
+                <div class="quiz-options">
+                     <button class="quiz-btn"></button>
+                     <button class="quiz-btn"></button>
+                     <button class="quiz-btn"></button>
+                     <button class="quiz-btn"></button>
+                 </div>
+                <p class="flag-feedback quiz-feedback"></p>
+                 <p class="flag-completion-message quiz-completion-message" style="display: none;"></p>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 GeoQuest: Coğrafya Macerası Projesi</p>
+        </div>
+    </footer>
+
+    <script src="flag-quiz-script.js"></script>
+
+</body>
+</html>
+
