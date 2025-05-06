@@ -189,8 +189,8 @@ nav a:hover {
 
 .map-hotspot {
     position: absolute;
-    width: 25px;
-    height: 25px;
+    width: 15px;
+    height: 15px;
     background-color: rgba(255, 0, 0, 0.7); /* Kırmızı, daha opak */
     border-radius: 50%;
     cursor: pointer;

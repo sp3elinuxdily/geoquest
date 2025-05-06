@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GeoQuest: Türkiye Volkanik Dağları Görevi</title> <link rel="stylesheet" href="style.css"> </head>
+    <title>GeoQuest: Türkiye Harita Oyunları</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 <body>
 
     <header>
@@ -12,19 +14,37 @@
             <p class="site-slogan">Coğrafya Macerası</p>
             <nav>
                 <ul>
-                    <li><a href="index.html#oyun-alani">Oyun Alanına Geri Dön</a></li> <li><a href="index.html#konular">Konular</a></li>
+                    <li><a href="index.html#oyun-alani">Oyun Alanına Geri Dön</a></li>
+                    <li><a href="index.html#konular">Konular</a></li>
                     <li><a href="index.html#iletisim">İletişim</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <section id="turkey-volcano-map-section" class="section game-area-section"> <div class="container">
-            <h2>Türkiye Volkanik Dağları Görevi</h2> <p class="map-intro-text">Haritada gösterilmesi istenen volkanik dağı, tüm noktalar arasından bulun ve tıklayın.</p> <div class="game-example map-challenge-example"> <h3>Hangi Dağ Nerede?</h3> <p class="map-challenge-description"></p> <div class="turkey-map-container"> <img src="2a-turkiye-fiziki-haritasi.jpg" alt="Türkiye Volkanik Dağları Haritası" class="turkey-map-image">
-                    </div>
+    <section id="turkey-map-games-section" class="section game-area-section">
+        <div class="container">
+            <h2>Türkiye Harita Oyunları</h2>
+            <p>Türkiye haritası üzerinde farklı coğrafi şekillerin yerlerini bulun.</p>
 
-                 <p class="map-challenge-feedback map-feedback"></p> <p class="map-completion-message quiz-completion-message" style="display: none;"></p>
-             </div>
+            <div class="game-example map-challenge-example volcano-map-game">
+                <h3>Türkiye Volkanik Dağları Görevi</h3>
+                 <p class="game-intro-text">Haritada gösterilmesi istenen volkanik dağı, tüm noktalar arasından bulun ve tıklayın.</p>
+                 <p class="game-description"></p> <div class="turkey-map-container">
+                     <img src="2a-turkiye-fiziki-haritasi.jpg" alt="Türkiye Volkanik Dağları Haritası" class="turkey-map-image">
+                     </div>
+
+                 <p class="game-feedback map-feedback"></p> <p class="game-completion-message quiz-completion-message" style="display: none;"></p> </div>
+
+             <div class="game-example map-challenge-example massif-map-game" style="margin-top: 60px;">
+                <h3>Türkiye Masifleri Görevi</h3>
+                 <p class="game-intro-text">Haritada gösterilmesi istenen masifi, tüm noktalar arasından bulun ve tıklayın.</p>
+                 <p class="game-description"></p> <div class="turkey-map-container">
+                     <img src="2a-turkiye-fiziki-haritasi.jpg" alt="Türkiye Masifleri Haritası" class="turkey-map-image">
+                     </div>
+
+                 <p class="game-feedback map-feedback"></p> <p class="game-completion-message quiz-completion-message" style="display: none;"></p> </div>
+
 
         </div>
     </section>
@@ -35,5 +55,8 @@
         </div>
     </footer>
 
-    <script src="turkey-map-script.js"></script> </body>
+    <script src="turkey-map-script.js"></script>
+
+</body>
 </html>
+
