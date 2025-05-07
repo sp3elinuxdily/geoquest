@@ -20,7 +20,7 @@ const flagQuizQuestions_data = [
     { country: 'Almanya', flagUrl: 'https://upload.wikimedia.org/wikipedia/commons/b/ba/Flag_of_Germany.svg', options: ['Fransa', 'Belçika', 'Almanya', 'Hollanda'] },
     { country: 'Fransa', flagUrl: 'https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg', options: ['İtalya', 'Fransa', 'İrlanda', 'Belçika'] },
     { country: 'İtalya', flagUrl: 'https://upload.wikimedia.org/wikipedia/commons/0/03/Flag_of_Italy.svg', options: ['İtalya', 'Macaristan', 'Meksika', 'İrlanda'] },
-    { country: 'Japonya', flagUrl: 'https://upload.wikimedia.org/wikipedia/commons/9/9e/Flag_of_Japan.svg', options: ['Seul', 'Pekin', 'Bangkok', 'Tokyo'] },
+    { country: 'Japonya', flagUrl: 'https://upload.wikimedia.org/wikipedia/commons/9/9e/Flag_of_Japan.svg', options: ['Japonya', 'Çin', 'Tayland', 'Nepal'] },
     { country: 'Kanada', flagUrl: 'https://upload.wikimedia.org/wikipedia/commons/c/cf/Flag_of_Canada.svg', options: ['Amerika Birleşik Devletleri', 'Kanada', 'Avustralya', 'Yeni Zelanda'] },
     { country: 'Brezilya', flagUrl: 'https://upload.wikimedia.org/wikipedia/commons/0/05/Flag_of_Brazil.svg', options: ['Arjantin', 'Kolombiya', 'Brezilya', 'Şili'] },
     { country: 'Çin', flagUrl: 'https://upload.wikimedia.org/wikipedia/commons/f/fa/Flag_of_the_People%27s_Republic_of_China.svg', options: ['Hindistan', 'Japonya', 'Tayvan', 'Çin'] },
